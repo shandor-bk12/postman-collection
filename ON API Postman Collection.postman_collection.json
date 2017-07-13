@@ -1,0 +1,195 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ON API Postman Collection (GET only)",
+		"_postman_id": "bacb89e2-b831-2f0e-0eaf-7408e9bf238f",
+		"description": "A collaborative effort to add ON API endpoints to Postman to make it easier for others to get a head start with making calls in Postman.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authenticate",
+			"description": "",
+			"item": [
+				{
+					"name": "Auth Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", jsonData.Token);",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{base}}/authentication/login/?username={{user}}&password={{pass}}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "School Info",
+			"description": "",
+			"item": [
+				{
+					"name": "Term",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{base}}/schoolinfo/term?t={{token}}&schoolYear=2016%20-%202017",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"schoolinfo",
+								"term"
+							],
+							"query": [
+								{
+									"key": "t",
+									"value": "{{token}}",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "schoolYear",
+									"value": "2016%20-%202017",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Term (schoolYear as variable)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{base}}/schoolinfo/term?t={{token}}&schoolYear={{schoolYear}}",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "School Levels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{base}}/schoolinfo/schoollevel?t={{token}}",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"schoolinfo",
+								"schoollevel"
+							],
+							"query": [
+								{
+									"key": "t",
+									"value": "{{token}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Grade Levels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{base}}/schoolinfo/gradelevel?t={{token}}",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"schoolinfo",
+								"gradelevel"
+							],
+							"query": [
+								{
+									"key": "t",
+									"value": "{{token}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
